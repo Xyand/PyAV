@@ -257,6 +257,8 @@ cdef class VideoFrame(Frame):
             return np.frombuffer(frame.planes[0], np.dtype('>u2')).reshape(frame.height, frame.width)
         elif frame.format.name == 'gray16le':
             return np.frombuffer(frame.planes[0], np.dtype('<u2')).reshape(frame.height, frame.width)
+        elif frame.format.name == 'gray':
+            return np.frombuffer(frame.planes[0], np.uint8).reshape(frame.height, frame.width)
         else:
             raise ValueError("Cannot conveniently get numpy array from %s format" % frame.format.name)
 
